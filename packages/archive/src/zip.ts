@@ -2,6 +2,7 @@ import JSZip from 'jszip';
 import {
   DEFAULT_ARCHIVE_LIMITS,
   RpcError,
+  sanitizeFileNameBase,
   type ArchiveLimits,
   type PackArchive,
 } from '@rpc/core';
@@ -212,7 +213,7 @@ export async function writeZip(archive: PackArchive): Promise<Uint8Array> {
 }
 
 export function suggestOutputName(packName: string, targetVersion: string): string {
-  const base = packName.replace(/\.zip$/i, '').replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_').trim() || 'resourcepack';
+  const base = sanitizeFileNameBase(packName.replace(/\.zip$/i, ''));
   return `${base}-${targetVersion}.zip`;
 }
 

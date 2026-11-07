@@ -1,10 +1,11 @@
-import { RpcError, type ArchiveLimits, DEFAULT_ARCHIVE_LIMITS } from '@rpc/core';
+import { RpcError, type ArchiveLimits } from '@rpc/core';
 
 export interface ZipDirectoryEntry {
   name: string;
   isDirectory: boolean;
   compressedSize: number;
   uncompressedSize: number;
+  localHeaderOffset: number;
   encrypted: boolean;
   compressionMethod: number;
 }
@@ -121,19 +122,18 @@ export function readZipDirectory(data: Uint8Array): ZipDirectoryEntry[] {
     }
     if (name.includes('\0')) invalid('ZIP entry name contains a NUL byte');
 
-    const entry = {
+    const entry: ZipDirectoryEntry = {
       name,
       isDirectory: name.endsWith('/') || (view.getUint32(cursor + 38, true) & 0x10) !== 0,
       compressedSize,
       uncompressedSize,
+      localHeaderOffset,
       encrypted: (flags & 0x0001) !== 0 || (flags & 0x0040) !== 0,
       compressionMethod,
     };
-    readZip64Extra(view, cursor + 46 + nameLength, extraLength, {
-      compressedSize: entry.compressedSize,
-      uncompressedSize: entry.uncompressedSize,
-      localHeaderOffset,
-    });
+    // The ZIP64 extra field must update this exact object; passing a copy would
+    // silently leave 0xffffffff sentinel sizes in place.
+    readZip64Extra(view, cursor + 46 + nameLength, extraLength, entry);
     entries.push(entry);
     cursor = entryEnd;
   }

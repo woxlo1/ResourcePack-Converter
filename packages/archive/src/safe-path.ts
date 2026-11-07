@@ -1,4 +1,4 @@
-import { RpcError } from '@rpc/core';
+import { containsControlCharacters, RpcError } from '@rpc/core';
 
 const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\..*)?$/i;
 const DRIVE_PREFIX = /^[a-z]:/i;
@@ -31,7 +31,7 @@ export function normalizeArchivePath(rawPath: string): string {
     if (segment === '..') {
       throw new RpcError('UNSAFE_PATH', 'error.unsafePath', 'Archive entry attempts path traversal', rawPath);
     }
-    if (/[\u0000-\u001f\u007f]/.test(segment)) {
+    if (containsControlCharacters(segment)) {
       throw new RpcError('UNSAFE_PATH', 'error.unsafePath', 'Archive entry contains control characters', rawPath);
     }
     if (segment.endsWith('.') || segment.endsWith(' ')) {
