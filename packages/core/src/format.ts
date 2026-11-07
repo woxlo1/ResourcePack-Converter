@@ -57,17 +57,22 @@ export function parsePackFormat(value: unknown): PackFormat | null {
 export type FormatRange = { min: PackFormat; max: PackFormat };
 
 export function normalizeFormatRange(value: unknown): FormatRange | null {
-  const single = parsePackFormat(value);
-  if (single) return { min: single, max: single };
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    const record = value as Record<string, unknown>;
-    const min = parsePackFormat(record.min_inclusive ?? record.min);
-    const max = parsePackFormat(record.max_inclusive ?? record.max);
-    if (min && max && comparePackFormat(min, max) <= 0) return { min, max };
-  }
+  // A two-element array is ambiguous: supported_formats uses [min, max] while
+  // pack_format uses [major, minor]. Prefer the range reading, then fall back to
+  // the single-format reading (for example [69, 1] cannot be a valid range).
   if (Array.isArray(value) && value.length === 2) {
     const min = parsePackFormat(value[0]);
     const max = parsePackFormat(value[1]);
+    if (min && max && comparePackFormat(min, max) <= 0) return { min, max };
+    const single = parsePackFormat(value);
+    return single ? { min: single, max: single } : null;
+  }
+  const single = parsePackFormat(value);
+  if (single) return { min: single, max: single };
+  if (value && typeof value === 'object') {
+    const record = value as Record<string, unknown>;
+    const min = parsePackFormat(record.min_inclusive ?? record.min);
+    const max = parsePackFormat(record.max_inclusive ?? record.max);
     if (min && max && comparePackFormat(min, max) <= 0) return { min, max };
   }
   return null;

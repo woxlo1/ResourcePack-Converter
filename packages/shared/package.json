@@ -1,0 +1,18 @@
+{
+  "name": "@rpc/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@rpc/analyzer": "workspace:*",
+    "@rpc/archive": "workspace:*",
+    "@rpc/converter": "workspace:*",
+    "@rpc/core": "workspace:*",
+    "@rpc/report": "workspace:*",
+    "@rpc/validator": "workspace:*",
+    "@rpc/version-registry": "workspace:*"
+  }
+}
