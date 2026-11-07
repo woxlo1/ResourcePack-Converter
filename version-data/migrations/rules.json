@@ -1,0 +1,109 @@
+{
+  "$comment": "Metadata for conversion rules. Implementations live in packages/converter/src/rules. Every rule listed here must have exactly one implementation (enforced by tests).",
+  "rules": [
+    {
+      "id": "rpc:pack-mcmeta/format",
+      "name": "Update pack description metadata and pack_format",
+      "description": "Preserves description, unknown fields, features, filter, language and overlays while setting pack_format to the target resource pack format.",
+      "kind": "conversion",
+      "introducedIn": 1,
+      "source": "https://minecraft.wiki/w/Pack.mcmeta"
+    },
+    {
+      "id": "rpc:pack-mcmeta/min-max-format",
+      "name": "Migrate pack.mcmeta to min_format and max_format",
+      "description": "For resource pack format 69 (1.21.9) and newer, removes supported_formats and writes min_format/max_format. pack_format is kept only when the pack also declares support for older formats.",
+      "kind": "conversion",
+      "introducedIn": 69,
+      "source": "https://minecraft.wiki/w/Pack.mcmeta#History"
+    },
+    {
+      "id": "rpc:textures/folder-rename",
+      "name": "Rename legacy texture folders",
+      "description": "Renames textures/blocks to textures/block and textures/items to textures/item, as introduced by the flattening in resource pack format 4 (1.13).",
+      "kind": "conversion",
+      "introducedIn": 4,
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "rpc:item-model/overrides",
+      "name": "Convert legacy item model overrides to items model definitions",
+      "description": "For resource pack format 46 (1.21.4) and newer, creates assets/<namespace>/items/<id>.json from legacy overrides and removes the overrides field from the source model. Only predicates with a verified equivalent are converted; models containing unsupported predicates are left untouched and reported.",
+      "kind": "conversion",
+      "introducedIn": 46,
+      "source": "https://minecraft.wiki/w/Items_model_definition"
+    },
+    {
+      "id": "rpc:fonts/legacy-unicode",
+      "name": "Detect removed legacy_unicode font providers",
+      "description": "The legacy_unicode glyph provider was removed in resource pack format 15 (1.20). Glyph data cannot be reconstructed automatically, so affected font files are preserved and reported as unsupported.",
+      "kind": "validation",
+      "introducedIn": 15,
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "rpc:textures/png-only",
+      "name": "Validate that textures are PNG files",
+      "description": "Resource pack format 22 (1.20.3) only supports .png textures. Non-PNG texture files are reported and preserved.",
+      "kind": "validation",
+      "introducedIn": 22,
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "rpc:fonts/validate",
+      "name": "Validate font providers and referenced files",
+      "description": "Checks font JSON syntax, provider types, TTF shift bounds and referenced font textures.",
+      "kind": "validation",
+      "introducedIn": 1,
+      "source": "https://minecraft.wiki/w/Font"
+    },
+    {
+      "id": "rpc:shaders/verify-only",
+      "name": "Detect shaders without automatic conversion",
+      "description": "Shader and post-process formats changed repeatedly. GLSL and shader JSON are validated for syntax where possible but are never rewritten automatically.",
+      "kind": "validation",
+      "introducedIn": 42,
+      "source": "https://minecraft.wiki/w/Shader"
+    },
+    {
+      "id": "rpc:sounds/validate",
+      "name": "Validate sounds.json and referenced audio files",
+      "description": "Checks sounds.json structure and ensures referenced .ogg files exist in the pack. Audio content is never re-encoded.",
+      "kind": "validation",
+      "introducedIn": 1,
+      "source": "https://minecraft.wiki/w/Sounds.json"
+    },
+    {
+      "id": "rpc:blockstates/validate",
+      "name": "Validate blockstates and model references",
+      "description": "Checks variants/multipart structure, model references, rotation and weight fields.",
+      "kind": "validation",
+      "introducedIn": 1,
+      "source": "https://minecraft.wiki/w/Blockstates_definition"
+    },
+    {
+      "id": "rpc:atlases/validate",
+      "name": "Validate atlas definitions",
+      "description": "Checks atlas JSON syntax and source directory references.",
+      "kind": "validation",
+      "introducedIn": 12,
+      "source": "https://minecraft.wiki/w/Atlas"
+    },
+    {
+      "id": "rpc:textures/validate",
+      "name": "Validate textures and animation metadata",
+      "description": "Checks PNG signatures and .png.mcmeta animation data without recompressing images.",
+      "kind": "validation",
+      "introducedIn": 1,
+      "source": "https://minecraft.wiki/w/Resource_pack#Textures"
+    },
+    {
+      "id": "rpc:unknown/preserve",
+      "name": "Preserve unknown files",
+      "description": "Files that are not recognized as Minecraft resources are copied unchanged and listed in the report.",
+      "kind": "preservation",
+      "introducedIn": 1,
+      "source": "PROJECT_SPEC"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "paths": {
+      "@rpc/core": ["packages/core/src/index.ts"],
+      "@rpc/core/*": ["packages/core/src/*"],
+      "@rpc/archive": ["packages/archive/src/index.ts"],
+      "@rpc/version-registry": ["packages/version-registry/src/index.ts"],
+      "@rpc/analyzer": ["packages/analyzer/src/index.ts"],
+      "@rpc/converter": ["packages/converter/src/index.ts"],
+      "@rpc/validator": ["packages/validator/src/index.ts"],
+      "@rpc/report": ["packages/report/src/index.ts"],
+      "@rpc/shared": ["packages/shared/src/index.ts"],
+      "@rpc/ui": ["packages/ui/src/index.ts"]
+    }
+  }
+}

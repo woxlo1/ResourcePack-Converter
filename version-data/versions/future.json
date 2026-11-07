@@ -1,0 +1,45 @@
+{
+  "$comment": "Resource pack format numbers and release ranges are sourced from https://minecraft.wiki/w/Pack_format (release table). Future version identifiers follow the 26.x naming scheme used by Minecraft Java Edition.",
+  "versions": [
+    {
+      "id": "26.1.2",
+      "label": "26.1 – 26.1.2",
+      "versions": ["26.1", "26.1.1", "26.1.2"],
+      "resourcePackFormat": { "major": 84, "minor": 0 },
+      "dataPackFormat": { "major": 101, "minor": 1 },
+      "notes": [
+        "Item model format supports per-sub-model transformation.",
+        "Entity textures moved into per-entity folders and some entity textures renamed.",
+        "core/item shaders split from core/entity.",
+        "Item model definitions support minecraft:end_cube."
+      ],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "26.2",
+      "label": "26.2",
+      "versions": ["26.2"],
+      "resourcePackFormat": { "major": 88, "minor": 0 },
+      "dataPackFormat": { "major": 107, "minor": 1 },
+      "notes": [
+        "Beds use block models and textures; the minecraft:beds atlas was removed.",
+        "core text shaders replaced by core/text and core/text_background.",
+        "minecraft:end_cube model type added."
+      ],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "26.3",
+      "label": "26.3",
+      "versions": ["26.3"],
+      "resourcePackFormat": { "major": 97, "minor": 1 },
+      "dataPackFormat": { "major": 121, "minor": 0 },
+      "notes": [
+        "Trim palette textures moved to textures/palettes/trim/.",
+        "Palette mcmeta files require a palette section with base_palette.",
+        "The map_color tint source type was removed."
+      ],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    }
+  ]
+}

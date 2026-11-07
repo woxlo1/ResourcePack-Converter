@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://resourcepack-converter.local/schemas/texture-mcmeta.schema.json",
+  "type": "object",
+  "properties": {
+    "animation": {
+      "type": "object",
+      "properties": {
+        "frametime": { "type": "integer", "minimum": 1 },
+        "interpolate": { "type": "boolean" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "frames": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "integer", "minimum": 0 },
+              {
+                "type": "object",
+                "properties": {
+                  "index": { "type": "integer", "minimum": 0 },
+                  "time": { "type": "integer", "minimum": 1 }
+                },
+                "required": ["index"],
+                "additionalProperties": true
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "texture": {
+      "type": "object",
+      "properties": {
+        "blur": { "type": "boolean" },
+        "clamp": { "type": "boolean" },
+        "mipmaps": { "type": "array", "items": { "type": "string" } },
+        "mipmap_strategy": { "type": "string" },
+        "alpha_cutoff_bias": { "type": "number" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
