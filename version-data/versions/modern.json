@@ -1,0 +1,81 @@
+{
+  "$comment": "Resource pack format numbers and release ranges are sourced from https://minecraft.wiki/w/Pack_format (release table).",
+  "versions": [
+    {
+      "id": "1.20.1",
+      "label": "1.20 – 1.20.1",
+      "versions": ["1.20", "1.20.1"],
+      "resourcePackFormat": 15,
+      "dataPackFormat": 15,
+      "notes": [
+        "legacy_unicode glyph provider removed.",
+        "Bitmaps used by the uniform font removed."
+      ],
+      "migrationRuleIds": ["rpc:fonts/legacy-unicode"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.20.2",
+      "label": "1.20.2",
+      "versions": ["1.20.2"],
+      "resourcePackFormat": 18,
+      "dataPackFormat": 18,
+      "notes": [
+        "pack.mcmeta gained optional supported_formats and overlays.",
+        "Text field and scroller nine-sliced sprites introduced."
+      ],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.20.4",
+      "label": "1.20.3 – 1.20.4",
+      "versions": ["1.20.3", "1.20.4"],
+      "resourcePackFormat": 22,
+      "dataPackFormat": 26,
+      "notes": [
+        "Textures must be .png files.",
+        "grass block and item renamed to short_grass.",
+        "Crafter model, item model and block state added."
+      ],
+      "migrationRuleIds": ["rpc:textures/png-only"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.20.6",
+      "label": "1.20.5 – 1.20.6",
+      "versions": ["1.20.5", "1.20.6"],
+      "resourcePackFormat": 32,
+      "dataPackFormat": 41,
+      "notes": [
+        "TTF font provider shift is restricted to [-512, 512].",
+        "map_icons.png split into individual sprites.",
+        "Shader core attribute definitions changed."
+      ],
+      "migrationRuleIds": ["rpc:fonts/validate", "rpc:shaders/verify-only"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.1",
+      "label": "1.21 – 1.21.1",
+      "versions": ["1.21", "1.21.1"],
+      "resourcePackFormat": 34,
+      "dataPackFormat": 48,
+      "notes": ["Ominous trial spawner sounds renamed; new music discs and sound events."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.3",
+      "label": "1.21.2 – 1.21.3",
+      "versions": ["1.21.2", "1.21.3"],
+      "resourcePackFormat": 42,
+      "dataPackFormat": 57,
+      "notes": [
+        "Shader and post-process effect definitions/imports changed.",
+        "Equipment models and customizable tooltips introduced.",
+        "Bundle variants and torch models changed."
+      ],
+      "migrationRuleIds": ["rpc:shaders/verify-only"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    }
+  ]
+}

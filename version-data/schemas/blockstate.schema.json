@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://resourcepack-converter.local/schemas/blockstate.schema.json",
+  "type": "object",
+  "properties": {
+    "variants": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "model": { "type": "string" },
+              "x": { "type": "integer", "enum": [0, 90, 180, 270] },
+              "y": { "type": "integer", "enum": [0, 90, 180, 270] },
+              "uvlock": { "type": "boolean" },
+              "weight": { "type": "integer", "minimum": 1 }
+            },
+            "additionalProperties": true
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["model"],
+              "properties": {
+                "model": { "type": "string" },
+                "x": { "type": "integer", "enum": [0, 90, 180, 270] },
+                "y": { "type": "integer", "enum": [0, 90, 180, 270] },
+                "uvlock": { "type": "boolean" },
+                "weight": { "type": "integer", "minimum": 1 }
+              },
+              "additionalProperties": true
+            }
+          }
+        ]
+      }
+    },
+    "multipart": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["apply"],
+        "properties": {
+          "when": { "type": "object", "additionalProperties": true },
+          "apply": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "model": { "type": "string" },
+                  "x": { "type": "integer", "enum": [0, 90, 180, 270] },
+                  "y": { "type": "integer", "enum": [0, 90, 180, 270] },
+                  "uvlock": { "type": "boolean" }
+                },
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["model"],
+                  "properties": {
+                    "model": { "type": "string" },
+                    "x": { "type": "integer", "enum": [0, 90, 180, 270] },
+                    "y": { "type": "integer", "enum": [0, 90, 180, 270] },
+                    "uvlock": { "type": "boolean" }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

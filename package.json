@@ -1,0 +1,56 @@
+{
+  "name": "resourcepack-converter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rule-based Minecraft Java Edition resource pack converter for Desktop and Web",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @rpc/web dev",
+    "dev:web": "pnpm --filter @rpc/web dev",
+    "dev:desktop": "pnpm --filter @rpc/desktop dev",
+    "build": "pnpm --filter @rpc/web build && pnpm --filter @rpc/desktop build",
+    "build:web": "pnpm --filter @rpc/web build",
+    "build:desktop": "pnpm --filter @rpc/desktop build",
+    "package:desktop": "pnpm --filter @rpc/desktop package",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:security": "vitest run tests/security",
+    "test:e2e": "playwright test",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "jszip": "^3.10.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.3",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.1",
+    "vite": "^6.0.7",
+    "vitest": "^3.0.0"
+  }
+}

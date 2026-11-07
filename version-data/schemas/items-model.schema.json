@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://resourcepack-converter.local/schemas/items-model.schema.json",
+  "type": "object",
+  "required": ["model"],
+  "properties": {
+    "hand_animation_on_swap": { "type": "boolean" },
+    "oversized_in_gui": { "type": "boolean" },
+    "swap_animation_scale": { "type": "number" },
+    "model": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "minecraft:model",
+            "minecraft:composite",
+            "minecraft:condition",
+            "minecraft:select",
+            "minecraft:range_dispatch",
+            "minecraft:empty",
+            "minecraft:bundle/selected_item",
+            "minecraft:special"
+          ]
+        },
+        "model": { "type": "string" },
+        "tints": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "models": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "property": { "type": "string" },
+        "on_true": { "type": "object", "additionalProperties": true },
+        "on_false": { "type": "object", "additionalProperties": true },
+        "cases": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "entries": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "fallback": { "type": "object", "additionalProperties": true },
+        "scale": { "type": "number" },
+        "base": { "type": "string" },
+        "transformation": {}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

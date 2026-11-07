@@ -1,0 +1,85 @@
+{
+  "$comment": "Resource pack format numbers and release ranges are sourced from https://minecraft.wiki/w/Pack_format (release table).",
+  "versions": [
+    {
+      "id": "1.21.4",
+      "label": "1.21.4",
+      "versions": ["1.21.4"],
+      "resourcePackFormat": 46,
+      "dataPackFormat": 61,
+      "notes": [
+        "Data-driven item model definitions in assets/<namespace>/items/ replace model overrides.",
+        "The overrides field on models was removed.",
+        "Resin, eyeblossoms and GUI sprite changes.",
+        "Magma cube texture layout changed."
+      ],
+      "migrationRuleIds": ["rpc:item-model/overrides"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.5",
+      "label": "1.21.5",
+      "versions": ["1.21.5"],
+      "resourcePackFormat": 55,
+      "dataPackFormat": 71,
+      "notes": [
+        "Item model components changed.",
+        "Shader JSON program definitions for core shaders removed.",
+        "misc/enchanted_glint_entity.png renamed to misc/enchanted_glint_armor.png."
+      ],
+      "migrationRuleIds": ["rpc:shaders/verify-only"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.6",
+      "label": "1.21.6",
+      "versions": ["1.21.6"],
+      "resourcePackFormat": 63,
+      "dataPackFormat": 80,
+      "notes": [
+        "Core shader uniforms became uniform blocks.",
+        "Block model rotations no longer limited to 22.5 degree multiples.",
+        "oversized_in_gui item model field and player_head special model added."
+      ],
+      "migrationRuleIds": ["rpc:shaders/verify-only"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.8",
+      "label": "1.21.7 – 1.21.8",
+      "versions": ["1.21.7", "1.21.8"],
+      "resourcePackFormat": 64,
+      "dataPackFormat": 81,
+      "notes": ["New textures added; no breaking resource pack format changes."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.10",
+      "label": "1.21.9 – 1.21.10",
+      "versions": ["1.21.9", "1.21.10"],
+      "resourcePackFormat": { "major": 69, "minor": 0 },
+      "dataPackFormat": { "major": 88, "minor": 0 },
+      "notes": [
+        "Pack format now includes a minor version.",
+        "pack.mcmeta uses min_format and max_format; supported_formats is removed.",
+        "Some post-processing vertex shaders merged; OpenGL 3.3 required.",
+        "Sun and moon textures moved under environment/celestial/."
+      ],
+      "migrationRuleIds": ["rpc:pack-mcmeta/min-max-format"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.21.11",
+      "label": "1.21.11",
+      "versions": ["1.21.11"],
+      "resourcePackFormat": { "major": 75, "minor": 0 },
+      "dataPackFormat": { "major": 94, "minor": 1 },
+      "notes": [
+        "Item textures split out of the blocks atlas into a separate items atlas.",
+        "Block model multi-axis rotation and blockstate z rotation added.",
+        "mipmap_strategy replaces darkened_cutout_mipmap in texture mcmeta."
+      ],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    }
+  ]
+}

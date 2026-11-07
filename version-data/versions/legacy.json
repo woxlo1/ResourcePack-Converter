@@ -1,0 +1,103 @@
+{
+  "$comment": "Resource pack format numbers and release ranges are sourced from https://minecraft.wiki/w/Pack_format (release table). Data pack formats are listed for reference only.",
+  "versions": [
+    {
+      "id": "1.8.9",
+      "label": "1.6.1 – 1.8.9",
+      "versions": ["1.6.1", "1.7.10", "1.8.9"],
+      "resourcePackFormat": 1,
+      "notes": ["Initial resource pack system."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.10.2",
+      "label": "1.9 – 1.10.2",
+      "versions": ["1.9", "1.10.2"],
+      "resourcePackFormat": 2,
+      "notes": ["Model system changes: item tags, multipart block states, display tags."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.12.2",
+      "label": "1.11 – 1.12.2",
+      "versions": ["1.11", "1.12.2"],
+      "resourcePackFormat": 3,
+      "notes": ["All resource pack file names are required to be lowercase."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.14.4",
+      "label": "1.13 – 1.14.4",
+      "versions": ["1.13", "1.14.4"],
+      "resourcePackFormat": 4,
+      "notes": [
+        "Flattening renamed most block and item textures.",
+        "textures/blocks was renamed to textures/block.",
+        "textures/items was renamed to textures/item."
+      ],
+      "migrationRuleIds": ["rpc:textures/folder-rename"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.16.1",
+      "label": "1.15 – 1.16.1",
+      "versions": ["1.15", "1.16.1"],
+      "resourcePackFormat": 5,
+      "notes": ["Chest, banner and shield patterns use alpha channels; glint texture changes."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.16.5",
+      "label": "1.16.2 – 1.16.5",
+      "versions": ["1.16.2", "1.16.5"],
+      "resourcePackFormat": 6,
+      "notes": ["Wall model changes make format 5 and 6 not cross-compatible."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.17.1",
+      "label": "1.17 – 1.17.1",
+      "versions": ["1.17", "1.17.1"],
+      "resourcePackFormat": 7,
+      "notes": ["Drowned texture mirroring changed; dirt path texture rename."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.18.2",
+      "label": "1.18 – 1.18.2",
+      "versions": ["1.18", "1.18.2"],
+      "resourcePackFormat": 8,
+      "notes": ["inventory.png gained an extra sprite."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.19.2",
+      "label": "1.19 – 1.19.2",
+      "versions": ["1.19", "1.19.2"],
+      "resourcePackFormat": 9,
+      "notes": ["pack.mcmeta may contain a filter section."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.19.3",
+      "label": "1.19.3",
+      "versions": ["1.19.3"],
+      "resourcePackFormat": 12,
+      "notes": [
+        "Resource pack fixers for formats 3 and 4 were removed.",
+        "Atlases directory introduced.",
+        "Vex model and texture updated."
+      ],
+      "migrationRuleIds": ["rpc:atlases/validate"],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    },
+    {
+      "id": "1.19.4",
+      "label": "1.19.4",
+      "versions": ["1.19.4"],
+      "resourcePackFormat": 13,
+      "notes": ["Enchantment glint split into entity and item textures."],
+      "source": "https://minecraft.wiki/w/Pack_format"
+    }
+  ]
+}
