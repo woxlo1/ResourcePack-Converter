@@ -477,8 +477,19 @@ export function analyzeDependencies(
     }
   }
 
-  const missingReferences = collector.edges.filter((edge) => !edge.exists);
+  const missingReferences = collector.edges.filter(
+    (edge) => !edge.exists && !isGameProvidedTarget(edge.to),
+  );
   return { edges: collector.edges, missingReferences };
+}
+
+/**
+ * The game ships the `minecraft` namespace itself, so a pack may legitimately
+ * reference built-in models, textures or sounds without shipping them. Only
+ * references into custom namespaces must resolve inside the pack.
+ */
+function isGameProvidedTarget(path: string): boolean {
+  return path.startsWith('assets/minecraft/');
 }
 
 function isPng(data: Uint8Array): boolean {

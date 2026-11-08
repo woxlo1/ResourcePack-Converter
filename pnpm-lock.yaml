@@ -76,6 +76,25 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.5)
 
+  apps/web:
+    dependencies:
+      '@rpc/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      react:
+        specifier: ^19.0.0
+        version: 19.3.1
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.3.1(react@19.3.1)
+    devDependencies:
+      '@vitejs/plugin-react':
+        specifier: ^4.3.4
+        version: 4.7.0(vite@6.4.5(@types/node@22.20.5))
+      vite:
+        specifier: ^6.0.7
+        version: 6.4.5(@types/node@22.20.5)
+
   packages/analyzer: {}
 
   packages/archive: {}
@@ -113,6 +132,27 @@ importers:
       '@rpc/version-registry':
         specifier: workspace:*
         version: link:../version-registry
+
+  packages/ui:
+    dependencies:
+      '@rpc/core':
+        specifier: workspace:*
+        version: link:../core
+      '@rpc/report':
+        specifier: workspace:*
+        version: link:../report
+      '@rpc/shared':
+        specifier: workspace:*
+        version: link:../shared
+      '@rpc/version-registry':
+        specifier: workspace:*
+        version: link:../version-registry
+      react:
+        specifier: ^19.0.0
+        version: 19.3.1
+      zustand:
+        specifier: ^5.0.2
+        version: 5.1.0(@types/react@19.3.0)(react@19.3.1)
 
   packages/validator:
     dependencies:

@@ -214,7 +214,9 @@ function buildReport(input: ReportInput): ConversionReport {
     finishedAt: new Date(finishedMs).toISOString(),
     durationMs: finishedMs - input.startedMs,
     cancelled: input.cancelled,
-    totalFiles: input.plan.totalFiles,
+    // Count every reported file (output files plus dropped inputs) so the total
+    // always equals the sum of the status counters below.
+    totalFiles: files.length,
     successCount: count('SUCCESS'),
     warningCount: count('WARNING'),
     failedCount: count('FAILED'),
