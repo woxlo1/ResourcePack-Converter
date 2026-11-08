@@ -12,8 +12,12 @@ import type { ImportResult } from './worker-protocol';
 
 export interface AppActions {
   importZipFile: (file: File) => Promise<void>;
+  importZipPayload: (name: string, data: ArrayBuffer) => Promise<void>;
   importFolderFiles: (files: File[]) => Promise<void>;
+  importFolderPayload: (name: string, entries: { path: string; data: ArrayBuffer }[]) => Promise<void>;
   importDrop: (dataTransfer: DataTransfer) => Promise<void>;
+  pickZipFile: () => Promise<void>;
+  pickFolder: () => Promise<void>;
   refreshPlan: () => Promise<ConversionPlan | null>;
   startConversion: () => Promise<void>;
   cancelConversion: () => Promise<void>;
@@ -88,18 +92,17 @@ export function useAppActions(): AppActions {
     return false;
   }, [client, workerError]);
 
-  const importZipFile = useCallback(
-    async (file: File): Promise<void> => {
+  const importZipPayload = useCallback(
+    async (name: string, buffer: ArrayBuffer): Promise<void> => {
       if (!ensureWorker() || !client) return;
       const store = useAppStore.getState();
       store.setError(null);
       store.setNotice(null);
       store.setStatus({ isImporting: true, isRunning: false, cancelling: false });
       try {
-        const buffer = await file.arrayBuffer();
         await disposeCurrent();
         const result = await client.importZip(
-          file.name,
+          name,
           buffer,
           settingsToLimits(store.settings),
         );
@@ -111,6 +114,17 @@ export function useAppActions(): AppActions {
       }
     },
     [applyImported, client, disposeCurrent, ensureWorker],
+  );
+
+  const importZipFile = useCallback(
+    async (file: File): Promise<void> => {
+      try {
+        await importZipPayload(file.name, await file.arrayBuffer());
+      } catch (error) {
+        useAppStore.getState().setError(describeFailure(error, 'error.importFailed'));
+      }
+    },
+    [importZipPayload],
   );
 
   const importFolderPayload = useCallback(
@@ -185,6 +199,26 @@ export function useAppActions(): AppActions {
     },
     [importFromBundle, importZipFile],
   );
+
+  const pickZipFile = useCallback(async (): Promise<void> => {
+    if (!platform.pickZipFile) return;
+    try {
+      const picked = await platform.pickZipFile();
+      if (picked) await importZipPayload(picked.name, picked.data);
+    } catch (error) {
+      useAppStore.getState().setError(describeFailure(error, 'error.importFailed'));
+    }
+  }, [importZipPayload, platform]);
+
+  const pickFolder = useCallback(async (): Promise<void> => {
+    if (!platform.pickFolder) return;
+    try {
+      const picked = await platform.pickFolder();
+      if (picked) await importFolderPayload(picked.name, picked.entries);
+    } catch (error) {
+      useAppStore.getState().setError(describeFailure(error, 'error.importFailed'));
+    }
+  }, [importFolderPayload, platform]);
 
   const refreshPlan = useCallback(async (): Promise<ConversionPlan | null> => {
     const store = useAppStore.getState();
@@ -358,8 +392,12 @@ export function useAppActions(): AppActions {
   return useMemo<AppActions>(
     () => ({
       importZipFile,
+      importZipPayload,
       importFolderFiles,
+      importFolderPayload,
       importDrop,
+      pickZipFile,
+      pickFolder,
       refreshPlan,
       startConversion,
       cancelConversion,
@@ -377,9 +415,13 @@ export function useAppActions(): AppActions {
       downloadReport,
       importDrop,
       importFolderFiles,
+      importFolderPayload,
       importZipFile,
+      importZipPayload,
       notify,
       openSourceAnalysis,
+      pickFolder,
+      pickZipFile,
       refreshPlan,
       resetSession,
       startConversion,
