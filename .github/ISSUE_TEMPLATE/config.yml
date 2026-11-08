@@ -3,6 +3,3 @@ contact_links:
   - name: Security vulnerability
     url: https://github.com/woxlo1/ResourcePack-Converter/security/advisories/new
     about: Report security issues privately. Do not open a public issue.
-  - name: Questions and ideas
-    url: https://github.com/woxlo1/ResourcePack-Converter/discussions
-    about: Ask questions or discuss ideas with the community.
