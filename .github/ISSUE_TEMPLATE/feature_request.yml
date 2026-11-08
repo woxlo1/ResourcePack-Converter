@@ -1,0 +1,59 @@
+name: Feature request
+description: Suggest a conversion rule, UI improvement or developer feature.
+title: 'feat: '
+labels: ['enhancement', 'needs triage']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or impossible today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior you expect. For conversion rules, include source and target pack formats.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Conversion rule
+        - Version data
+        - Web UI
+        - Desktop app
+        - Reports
+        - Developer experience / CI
+        - Documentation
+    validations:
+      required: true
+
+  - type: input
+    id: formats
+    attributes:
+      label: Pack formats
+      description: If this is a conversion rule, which formats are involved?
+      placeholder: '15 → 46'
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Link to Minecraft Wiki pages, vanilla output or example packs.
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false

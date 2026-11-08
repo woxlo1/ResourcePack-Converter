@@ -16,6 +16,7 @@
     "build:web": "pnpm --filter @rpc/web build",
     "build:desktop": "pnpm --filter @rpc/desktop build",
     "package:desktop": "pnpm --filter @rpc/desktop package",
+    "dist:desktop": "pnpm --filter @rpc/desktop dist",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -24,7 +25,9 @@
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "test:security": "vitest run tests/security",
-    "test:e2e": "playwright test",
+    "test:e2e": "pnpm build:web && playwright test",
+    "test:e2e:web": "pnpm build:web && playwright test",
+    "test:e2e:desktop": "pnpm build:desktop && playwright test --config playwright.desktop.config.ts",
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {
