@@ -12,7 +12,8 @@
     "tests/**/*.ts",
     "scripts/**/*.mjs",
     "vitest.config.ts",
-    "playwright.config.ts"
+    "playwright.config.ts",
+    "playwright.desktop.config.ts"
   ],
   "exclude": ["node_modules", "**/dist", "**/dist-electron", "**/release"]
 }
