@@ -1,13 +1,30 @@
+import type { FolderEntry } from './worker-protocol';
+
 export interface SaveFileOptions {
   fileName: string;
   data: Uint8Array;
   mimeType: string;
 }
 
+/** A ZIP chosen through a native dialog, before it reaches the worker. */
+export interface PickedZipFile {
+  name: string;
+  data: ArrayBuffer;
+}
+
+/** A folder chosen through a native dialog, before it reaches the worker. */
+export interface PickedFolder {
+  name: string;
+  entries: FolderEntry[];
+}
+
 export interface PlatformAdapter {
   kind: 'web' | 'desktop';
   saveFile(options: SaveFileOptions): Promise<boolean>;
   copyText(text: string): Promise<boolean>;
+  /** Native desktop dialogs; omitted by the browser adapter. */
+  pickZipFile?(): Promise<PickedZipFile | null>;
+  pickFolder?(): Promise<PickedFolder | null>;
 }
 
 function fallbackCopy(text: string): boolean {

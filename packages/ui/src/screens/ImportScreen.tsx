@@ -4,6 +4,7 @@ import { Badge, Button, Card, DefinitionList, EmptyState, ScreenHeader } from '.
 import { formatBytes } from '../format';
 import { useAppStore, useTranslation } from '../store';
 import { useAppActions } from '../actions';
+import { useServices } from '../services-context';
 
 const FOLDER_PROPS = { webkitdirectory: '', directory: '' } as unknown as Record<string, string>;
 
@@ -12,10 +13,27 @@ export function ImportScreen(): ReactElement {
   const source = useAppStore((state) => state.source);
   const isImporting = useAppStore((state) => state.status.isImporting);
   const setScreen = useAppStore((state) => state.setScreen);
-  const { importZipFile, importFolderFiles, importDrop } = useAppActions();
+  const { importZipFile, importFolderFiles, importDrop, pickZipFile, pickFolder } = useAppActions();
+  const { platform } = useServices();
   const zipInput = useRef<HTMLInputElement>(null);
   const folderInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
+
+  const chooseZip = (): void => {
+    if (platform.pickZipFile) {
+      void pickZipFile();
+      return;
+    }
+    zipInput.current?.click();
+  };
+
+  const chooseFolder = (): void => {
+    if (platform.pickFolder) {
+      void pickFolder();
+      return;
+    }
+    folderInput.current?.click();
+  };
 
   const handleDrop = (event: DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
@@ -51,12 +69,12 @@ export function ImportScreen(): ReactElement {
             <p className="dropzone__title">{dragActive ? t('import.dragActive') : t('import.dropTitle')}</p>
             <p className="muted">{isImporting ? t('import.analyzing') : t('import.dropHint')}</p>
             <div className="dropzone__actions">
-              <Button onClick={() => zipInput.current?.click()} disabled={isImporting}>
+              <Button onClick={chooseZip} disabled={isImporting}>
                 {t('import.chooseZip')}
               </Button>
               <Button
                 variant="secondary"
-                onClick={() => folderInput.current?.click()}
+                onClick={chooseFolder}
                 disabled={isImporting}
               >
                 {t('import.chooseFolder')}
