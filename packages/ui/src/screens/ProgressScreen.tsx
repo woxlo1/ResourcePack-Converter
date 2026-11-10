@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactElement } from 'react';
+import { useEffect, useState, type ReactElement } from 'react';
 import type { ConversionProgress } from '@rpc/core';
 import { Button, Card, EmptyState, LogList, ProgressBar, ScreenHeader, Stat, StatGrid } from '../components';
 import { formatDuration } from '../format';
@@ -25,12 +25,12 @@ export function ProgressScreen(): ReactElement {
   const cancelling = useAppStore((state) => state.status.cancelling);
   const setScreen = useAppStore((state) => state.setScreen);
   const { cancelConversion } = useAppActions();
-  const startedAt = useRef(Date.now());
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
     if (!isRunning) return;
-    const timer = window.setInterval(() => setElapsed(Date.now() - startedAt.current), 250);
+    const startedAt = Date.now();
+    const timer = window.setInterval(() => setElapsed(Date.now() - startedAt), 250);
     return () => window.clearInterval(timer);
   }, [isRunning]);
 

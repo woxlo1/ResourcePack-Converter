@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactElement } from 'react';
+import { useEffect, useTransition, type ReactElement } from 'react';
 import { formatPackFormat } from '@rpc/core';
 import { ALL_VERSIONS, getVersionById } from '@rpc/version-registry';
 import {
@@ -27,22 +27,17 @@ export function ConfigureScreen(): ReactElement {
   const updateSettings = useAppStore((state) => state.updateSettings);
   const setScreen = useAppStore((state) => state.setScreen);
   const { refreshPlan, startConversion } = useAppActions();
-  const [planning, setPlanning] = useState(false);
+  const [planning, startPlanning] = useTransition();
 
   const sourceId = source?.sourceId ?? null;
   const { targetVersionId, preserveUnknownFiles } = settings;
 
   useEffect(() => {
     if (!sourceId) return;
-    let active = true;
-    setPlanning(true);
-    void refreshPlan().finally(() => {
-      if (active) setPlanning(false);
+    startPlanning(async () => {
+      await refreshPlan();
     });
-    return () => {
-      active = false;
-    };
-  }, [sourceId, targetVersionId, preserveUnknownFiles, refreshPlan]);
+  }, [sourceId, targetVersionId, preserveUnknownFiles, refreshPlan, startPlanning]);
 
   if (!source) {
     return (
