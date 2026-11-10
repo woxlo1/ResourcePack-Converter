@@ -45,7 +45,8 @@ jobs:
         shell: bash
         run: |
           cd apps/web/dist
-          zip -r "../../../resourcepack-converter-web-${GITHUB_REF_NAME}.zip" .
+          ref="${GITHUB_REF_NAME//\//-}"
+          zip -r "../../../resourcepack-converter-web-${ref}.zip" .
 
       - name: Upload web archive
         uses: actions/upload-artifact@v7
