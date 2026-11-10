@@ -1,9 +1,10 @@
 {
   "name": "@rpc/desktop",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "ResourcePack Converter desktop application",
+  "author": "woxlo1",
   "main": "dist-electron/main.cjs",
   "scripts": {
     "dev": "node scripts/dev.mjs",
@@ -26,8 +27,10 @@
   "build": {
     "appId": "com.woxlo.resourcepackconverter",
     "productName": "ResourcePack Converter",
+    "artifactName": "resourcepack-converter-${version}-${os}-${arch}.${ext}",
     "asar": true,
     "directories": {
+      "buildResources": "build",
       "output": "release"
     },
     "files": [
@@ -36,16 +39,26 @@
       "package.json"
     ],
     "win": {
+      "icon": "build/icon.ico",
       "target": [
         "nsis"
       ]
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    },
     "mac": {
+      "icon": "build/icon.icns",
+      "category": "public.app-category.utilities",
       "target": [
         "dmg"
       ]
     },
     "linux": {
+      "icon": "build/icon.png",
+      "category": "Utility",
       "target": [
         "AppImage"
       ]
