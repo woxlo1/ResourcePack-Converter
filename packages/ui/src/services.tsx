@@ -15,15 +15,28 @@ export function ServicesProvider({
 
   useEffect(() => {
     let instance: ConversionWorkerClient | null = null;
-    try {
-      instance = new ConversionWorkerClient(createWorker());
-      setClient(instance);
-      setWorkerError(null);
-    } catch (error) {
-      setClient(null);
-      setWorkerError(error instanceof Error ? error.message : String(error));
-    }
+    let cancelled = false;
+
+    // Creating the worker is an external-system side effect, so it cannot run
+    // during render. The state update is deferred to a microtask to avoid a
+    // synchronous cascading render inside the effect.
+    const setup = async (): Promise<void> => {
+      await Promise.resolve();
+      if (cancelled) return;
+      try {
+        instance = new ConversionWorkerClient(createWorker());
+        setClient(instance);
+        setWorkerError(null);
+      } catch (error) {
+        setClient(null);
+        setWorkerError(error instanceof Error ? error.message : String(error));
+      }
+    };
+
+    void setup();
+
     return () => {
+      cancelled = true;
       instance?.terminate();
     };
   }, [createWorker]);
