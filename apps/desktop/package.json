@@ -27,6 +27,7 @@
   "build": {
     "appId": "com.woxlo.resourcepackconverter",
     "productName": "ResourcePack Converter",
+    "executableName": "resourcepack-converter",
     "artifactName": "resourcepack-converter-${version}-${os}-${arch}.${ext}",
     "asar": true,
     "directories": {
