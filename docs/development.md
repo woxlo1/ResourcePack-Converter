@@ -33,6 +33,7 @@ dependencies from the workspace root reliably.
 | `pnpm verify` | Lint, typecheck, tests, build. |
 | `pnpm package:desktop` | Unpacked app via electron-builder. |
 | `pnpm dist:desktop` | Installers via electron-builder. |
+| `pnpm icons` | Regenerate icons and favicons from `apps/desktop/build/icon.svg`. |
 
 Install Playwright browsers once per machine:
 
@@ -177,12 +178,25 @@ Conventions:
 
 Artifacts (`playwright-report`, `test-results`) are uploaded on failure.
 
+`.github/workflows/pages.yml` deploys the static web build to GitHub Pages on
+every push to `main`. `.github/workflows/release.yml` builds installers for
+Windows, Linux and macOS plus the web archive when a `v*` tag is pushed. See
+[release.md](release.md).
+
 ## Packaging
 
 `apps/desktop/package.json` holds the electron-builder configuration
-(`appId`, targets, asar, files). `pnpm dist:desktop` builds the renderer and
-main process first, then runs electron-builder for the current platform. macOS
-and Linux installers must be produced on their respective platforms.
+(`appId`, targets, asar, files, icons). `pnpm dist:desktop` builds the renderer
+and main process first, then runs electron-builder for the current platform.
+macOS and Linux installers must be produced on their respective platforms.
+
+Electron is pinned to an exact version (`33.4.11`) because electron-builder 26
+refuses to infer a version from a semver range. Bump it deliberately and run
+`pnpm package:desktop` afterwards.
+
+Icons are committed under `apps/desktop/build/` and `apps/web/public/`; run
+`pnpm icons` after changing `icon.svg`. Signing and release steps are covered
+in [release.md](release.md).
 
 ## Troubleshooting
 

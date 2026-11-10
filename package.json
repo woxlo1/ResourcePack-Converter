@@ -1,6 +1,6 @@
 {
   "name": "resourcepack-converter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Rule-based Minecraft Java Edition resource pack converter for Desktop and Web",
   "license": "MIT",
@@ -28,6 +28,7 @@
     "test:e2e": "pnpm build:web && playwright test",
     "test:e2e:web": "pnpm build:web && playwright test",
     "test:e2e:desktop": "pnpm build:desktop && playwright test --config playwright.desktop.config.ts",
+    "icons": "node tools/generate-icons.mjs",
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {

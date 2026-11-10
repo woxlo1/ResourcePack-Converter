@@ -11,7 +11,7 @@ import { createDesktopPlatform } from './desktop-platform';
 const services: UiServices = {
   platform: createDesktopPlatform(),
   createWorker: createDefaultWorker,
-  appVersion: '0.1.0',
+  appVersion: '1.0.0',
 };
 
 const container = document.getElementById('root');

@@ -11,7 +11,7 @@ import {
 const services: UiServices = {
   platform: createWebPlatform(),
   createWorker: createDefaultWorker,
-  appVersion: '0.1.0',
+  appVersion: '1.0.0',
 };
 
 const container = document.getElementById('root');

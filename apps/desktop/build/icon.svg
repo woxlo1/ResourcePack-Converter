@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ResourcePack Converter">
+  <defs>
+    <linearGradient id="bg" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d4ed8" />
+      <stop offset="0.55" stop-color="#2563eb" />
+      <stop offset="1" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <g>
+    <polygon points="196,142 310,204 196,266 82,204" fill="#ffffff" />
+    <polygon points="82,204 196,266 196,400 82,338" fill="#dbeafe" />
+    <polygon points="196,266 310,204 310,338 196,400" fill="#bfdbfe" />
+  </g>
+  <g fill="#ffffff">
+    <rect x="330" y="234" width="92" height="44" rx="22" />
+    <polygon points="408,200 474,256 408,312" />
+  </g>
+</svg>

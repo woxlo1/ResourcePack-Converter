@@ -7,7 +7,15 @@ file-by-file report. Everything runs locally — no uploads, no AI services, no
 network calls at runtime.
 
 [![CI](https://github.com/woxlo1/ResourcePack-Converter/actions/workflows/ci.yml/badge.svg)](https://github.com/woxlo1/ResourcePack-Converter/actions/workflows/ci.yml)
+[![Deploy web app](https://github.com/woxlo1/ResourcePack-Converter/actions/workflows/pages.yml/badge.svg)](https://github.com/woxlo1/ResourcePack-Converter/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+## Use it
+
+- **Browser:** <https://woxlo1.github.io/ResourcePack-Converter/> — nothing to
+  install, conversions run locally in a Web Worker.
+- **Desktop:** download the installer for Windows, Linux or macOS from the
+  [latest release](https://github.com/woxlo1/ResourcePack-Converter/releases/latest).
 
 ## Highlights
 
@@ -126,10 +134,12 @@ packages/
   ui/                  Screens, state, i18n, worker client, platform adapters
 version-data/          Version tables, rule metadata, JSON schemas
 tests/                 Unit, integration, security and Playwright E2E tests
-docs/                  Architecture, rules, security and development docs
+docs/                  Architecture, rules, security, development and release docs
+tools/                 Repository scripts (icon generation)
 ```
 
-More detail: [docs/architecture.md](docs/architecture.md).
+More detail: [docs/architecture.md](docs/architecture.md). Deployment and
+release automation: [docs/release.md](docs/release.md).
 
 ## Scripts
 
@@ -146,6 +156,7 @@ More detail: [docs/architecture.md](docs/architecture.md).
 | `pnpm verify` | Lint + typecheck + tests + build (what CI runs). |
 | `pnpm package:desktop` | Unpacked Electron app via electron-builder. |
 | `pnpm dist:desktop` | Platform installers via electron-builder. |
+| `pnpm icons` | Regenerate app icons and web favicon from `apps/desktop/build/icon.svg`. |
 
 ## Security
 
